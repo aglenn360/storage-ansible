@@ -27,7 +27,7 @@
         openshift.io/cluster-monitoring: "true"
         
 - name: Set Namespace for cluster logging
-  community.kubernetes.k8s_info:
+  k8s_info:
     state: present
     apiVersion: v1
     kind: Namespace
