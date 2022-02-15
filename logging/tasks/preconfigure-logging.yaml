@@ -16,7 +16,7 @@
 
 
         
-- name: Set Namespace for cluster logging
+- name: Set Namespace for logging operator
   k8s:
     state: present
     apiVersion: v1
