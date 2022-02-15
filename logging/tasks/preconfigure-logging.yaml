@@ -32,29 +32,29 @@
 - name: Deploy elasticsearch operator
   k8s:
     state: present
+    definition:
     apiVersion: operators.coreos.com/v1alpha1
     kind: Subscription
-    definition:
-      metadata:
-        name: "elasticsearch-operator"
-        namespace: "openshift-operators-redhat" 
-      spec:
-        channel: "stable-5.3" 
-        installPlanApproval: "Automatic"
-        source: "redhat-operators" 
-        sourceNamespace: "openshift-marketplace"
-        name: "elasticsearch-operator"
+    metadata:
+      name: "elasticsearch-operator"
+      namespace: "openshift-operators-redhat" 
+    spec:
+      channel: "stable-5.3" 
+      installPlanApproval: "Automatic"
+      source: "redhat-operators" 
+      sourceNamespace: "openshift-marketplace"
+      name: "elasticsearch-operator"
 
 - name: Set Operator Group for cluster logging
   k8s:
     state: present
+    definition:
     apiVersion: operators.coreos.com/v1
     kind: OperatorGroup
-    definition:
-      metadata:
-        name: openshift-operators-redhat
-        namespace: openshift-operators-redhat 
-      spec: {}
+    metadata:
+      name: openshift-operators-redhat
+      namespace: openshift-operators-redhat 
+    spec: {}
 
 
 
