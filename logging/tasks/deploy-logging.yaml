@@ -4,28 +4,30 @@
 - name: Deploy cluster logging operator
   k8s:
     state: present
-    apiVersion: operators.coreos.com/v1alpha1
-    kind: Subscription
-    metadata:
-      name: cluster-logging
-      namespace: openshift-logging 
-    spec:
-      channel: "stable" 
-      name: cluster-logging
-      source: redhat-operators 
-      sourceNamespace: openshift-marketplace
+    definition:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: Subscription
+      metadata:
+        name: cluster-logging
+        namespace: openshift-logging 
+      spec:
+        channel: "stable" 
+        name: cluster-logging
+        source: redhat-operators 
+        sourceNamespace: openshift-marketplace
 
 - name: Set Operator Group for cluster logging
   k8s:
     state: present
-    apiVersion: operators.coreos.com/v1
-    kind: OperatorGroup
-    metadata:
-      name: cluster-logging
-      namespace: openshift-logging 
-    spec:
-      targetNamespaces:
-      - openshift-logging
+    definition:
+      apiVersion: operators.coreos.com/v1
+      kind: OperatorGroup
+      metadata:
+        name: cluster-logging
+        namespace: openshift-logging 
+      spec:
+        targetNamespaces:
+        - openshift-logging
 
 
 - name: Pause for 30 seconds for both operators to be created
