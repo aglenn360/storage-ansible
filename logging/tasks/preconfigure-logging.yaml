@@ -14,17 +14,7 @@
         labels:
           openshift.io/cluster-monitoring: "true"
 
-- name: Set Namespace for cluster logging
-  k8s:
-    state: present
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: openshift-operators-redhat 
-      annotations:
-        openshift.io/node-selector: ""
-      labels:
-        openshift.io/cluster-monitoring: "true"
+
         
 - name: Set Namespace for cluster logging
   k8s_info:
