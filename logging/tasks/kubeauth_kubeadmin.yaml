@@ -1,0 +1,9 @@
+    - name: Auth as kubeadmin user
+      aws_s3:
+        aws_access_key: "{{ role_app_creator.sts_creds.access_key }}"
+        aws_secret_key: "{{ role_app_creator.sts_creds.secret_key }}"
+        security_token: "{{ role_app_creator.sts_creds.session_token }}"
+        bucket: "{{ aws_account_name }}-ocp-resources-bucket"
+        object: cluster-provisioning/auth/kubeconfig
+        dest: "{{ kubeconfig }}"
+        mode: get

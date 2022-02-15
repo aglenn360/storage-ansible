@@ -1,0 +1,6 @@
+- name: Assume app creator
+  sts_assume_role:
+    role_arn: "arn:aws:iam::{{ aws_account_id }}:role/{{ aws_account_name }}-role-app-creator"
+    role_session_name: "{{ aws_account_name }}-app-creator-ocp-provisioning"
+    region: "{{ aws_default_region }}"
+  register: "role_app_creator"

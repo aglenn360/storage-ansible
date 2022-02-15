@@ -1,0 +1,13 @@
+---
+# tasks file for openshift-logging
+# - name: Assume role app creator
+#   import_tasks: assume_role_ac.yaml
+
+# - name: Auth as kubeadmin user
+#   import_tasks: kubeauth_kubeadmin.yaml
+
+- name: Logging Stack preconfig
+  import_tasks: preconfigure-logging.yaml
+
+- name: Logging Stack Deploy
+  import_tasks: deploy-logging.yaml

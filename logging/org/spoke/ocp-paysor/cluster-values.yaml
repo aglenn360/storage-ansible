@@ -1,0 +1,17 @@
+# installation template variable for dev
+base_domain: nbs-ocp-paysor-dev.aws.nbscloud.co.uk
+cluster_name: paysor-dev-ansible-test 
+cluster_network_cidr: 192.168.0.0/16
+installerfile: openshift-install-linux-{{ openshift_version }}.tar.gz
+machine_cidr: 10.166.32.0/20
+master_machine_type: t3a.2xlarge
+master_replicas: 3
+openshift_download_url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}
+openshift_version: 4.4.10
+region: eu-west-2
+service_network_cidr: 172.30.0.0/16
+subnet_1: subnet-013d2cea307b268ca
+subnet_2: subnet-0b99c1e26737ae539
+subnet_3: subnet-032735c6216442b10
+worker_machine_type: t3a.large
+worker_replicas: 3

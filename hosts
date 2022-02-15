@@ -1,0 +1,15 @@
+---
+all:
+  children:
+    development:
+      hosts:
+        ocp_dev:
+          ansible_connection: local
+    staging:
+      hosts:
+        ocp_staging:
+          ansible_connection: local
+    production:
+      hosts:
+        ocp_production:
+          ansible_connection: local

@@ -1,0 +1,5 @@
+skip_list:
+# Skip line char width as error for now as width not been decided.
+  - '204'
+# Skip compare to empty string as no much better solutions and diasagreement on it beign a rule at all: https://github.com/ansible/ansible-lint/issues/457
+  - '602'

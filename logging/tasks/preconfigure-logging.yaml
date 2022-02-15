@@ -1,0 +1,70 @@
+---
+#pre-configuration tasks for logging EFK stack
+
+- name: Set Namespace for cluster logging
+  k8s:
+    state: present
+    api_version: v1
+    kind: Namespace
+    definition:
+      metadata:
+        name: openshift-logging
+        annotations:
+          openshift.io/node-selector: ""
+        labels:
+          openshift.io/cluster-monitoring: "true"
+
+- name: Set Namespace for cluster logging
+  k8s:
+    state: present
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: openshift-operators-redhat 
+      annotations:
+        openshift.io/node-selector: ""
+      labels:
+        openshift.io/cluster-monitoring: "true"
+        
+- name: Set Namespace for cluster logging
+  community.kubernetes.k8s_info:
+    state: present
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: openshift-operators-redhat 
+      annotations:
+        openshift.io/node-selector: ""
+      labels:
+        openshift.io/cluster-monitoring: "true"
+
+- name: Deploy elasticsearch operator
+  k8s:
+    state: present
+    apiVersion: operators.coreos.com/v1alpha1
+    kind: Subscription
+    metadata:
+      name: "elasticsearch-operator"
+      namespace: "openshift-operators-redhat" 
+    spec:
+      channel: "stable-5.3" 
+      installPlanApproval: "Automatic"
+      source: "redhat-operators" 
+      sourceNamespace: "openshift-marketplace"
+      name: "elasticsearch-operator"
+
+- name: Set Operator Group for cluster logging
+  k8s:
+    state: present
+    apiVersion: operators.coreos.com/v1
+    kind: OperatorGroup
+    metadata:
+      name: openshift-operators-redhat
+      namespace: openshift-operators-redhat 
+    spec: {}
+
+
+
+- name: Pause for 10 seconds for OperatorGroup to be created
+  pause:
+    seconds: 10

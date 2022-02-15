@@ -1,0 +1,39 @@
+---
+version: '3.8'
+services:
+  ocp:
+    image: ccoe-docker-rel-local.artifactory.aws.nbscloud.co.uk/ocp:1.3.0
+    env_file: .env
+    working_dir: /opt/app
+    volumes:
+      - .:/opt/app:rw
+      - ./passwd:/etc/passwd:rw
+      - ~/.aws:/opt/app/.aws
+      - ~/.ssh:/opt/app/.ssh:rw
+  ansible:
+    image: ccoe-docker-dev-local.artifactory.aws.nbscloud.co.uk/ansible:spartan-ansible-helm-2.7.0
+    env_file: .env
+    working_dir: /opt/app
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ../..:/opt/app/ansible:rw
+      - .:/opt/app:rw
+      - ./passwd:/etc/passwd:rw
+      - ~/.aws:/opt/app/.aws
+      - ~/.ssh:/opt/app/.ssh:rw
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+  semver:
+    image: ccoe-docker-rel-local.artifactory.aws.nbscloud.co.uk/semver:3.1.1
+    env_file: .env
+    working_dir: /opt/build
+    volumes:
+      - .:/opt/build:rw
+      - ./passwd:/etc/passwd:rw
+      - ~/.ssh:/opt/app/.ssh:rw
+  passwd-gen:
+    image: ccoe-docker-rel-local.artifactory.aws.nbscloud.co.uk/passwd-gen:0.2.0
+    env_file: .env
+    working_dir: /opt/app   

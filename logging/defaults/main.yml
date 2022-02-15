@@ -1,0 +1,36 @@
+---
+# defaults file for openshift-logging this will deploy into dev cluster, in the pipeline these will be overridden by cluster definition vars in the metarepo
+### location of kubeconfig file
+kubeconfig: '/opt/app/kubeconfig'
+
+### docker user
+builduser: 'dockeruser'
+
+### aws default region
+aws_default_region: 'eu-west-2'
+
+### working_dir
+working_dir: '/opt/app'
+
+### AWS Spoke account information
+### AWS Account Path AWS 
+aws_account_path: org/spoke/ocp/dev
+
+### AWS Account Name
+aws_account_name: nbs-ocp-dev
+
+### AWS Account ID
+aws_account_id: 205570831565
+
+### Variables required for the logging stack EFK deployment
+###operator version for Logging stack (must be string)
+logging_operator_version: "4.4"
+
+###number of elasticsearch pods to deploy
+es_node_count: 3
+
+###storge class for elasticsearch data
+es_storage_class: gp2
+
+###Persistent Volume size for Elasticsearch
+es_pv_size: 200G

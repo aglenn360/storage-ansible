@@ -1,0 +1,62 @@
+---
+apiVersion: "logging.openshift.io/v1"
+kind: "ClusterLogging"
+metadata:
+  name: "instance" 
+  namespace: "openshift-logging"
+spec:
+  managementState: "Managed"  
+  logStore:
+    type: "elasticsearch"  
+    elasticsearch:
+      resources:
+        limits:
+          cpu: "500m"
+          memory: "16Gi"
+        requests:
+          cpu: "500m"
+          memory: "16Gi"
+      nodeCount: {{ es_node_count }}
+      nodeSelector: 
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: infra
+        value: reserved
+      - effect: NoExecute
+        key: infra
+        value: reserved
+      storage:
+        storageClassName: {{ es_storage_class }} 
+        size: {{ es_pv_size }}
+      redundancyPolicy: "SingleRedundancy"
+  visualization:
+    type: "kibana"  
+    kibana:
+      replicas: 1
+      nodeSelector: 
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: infra
+        value: reserved
+      - effect: NoExecute
+        key: infra
+        value: reserved
+  curation:
+    type: "curator"  
+    curator:
+      schedule: "30 3 * * *"
+      nodeSelector: 
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: infra
+        value: reserved
+      - effect: NoExecute
+        key: infra
+        value: reserved
+  collection:
+    logs:
+      type: "fluentd"  
+      fluentd: {}

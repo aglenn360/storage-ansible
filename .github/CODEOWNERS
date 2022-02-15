@@ -1,0 +1,9 @@
+# .github/CODEOWNERS in Spartan team repos
+#
+# Should correspond with Engineers in the Spartan team:
+# https://docs.nationwidebuilding.luminatesec.com/docs/epaas-4x-aws/team/people/
+# 
+# Intend to replace individuals with GitHub teams for ease of management in the future:
+# https://jira.nbs.adaptavist.com/browse/CAOF-167
+
+* @carldeantucker @nickgibbon-nationwide @harmindersinghk @sholaj @aglenn360 @mihneaspirescu @jpantsjoha @thomasodus

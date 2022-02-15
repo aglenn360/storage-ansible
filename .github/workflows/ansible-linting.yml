@@ -1,0 +1,32 @@
+# ansible-lint: https://github.com/ansible/ansible-lint-action
+# GitHub Action: https://github.com/marketplace/actions/ansible-lint
+
+# yamllint: https://github.com/adrienverge/yamllint
+# GitHub Action: https://github.com/ibiqlik/action-yamllint
+
+name: Ansible Linting
+
+on: [push, pull_request]
+
+jobs:
+
+  yamllint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: yamllint
+      uses: ibiqlik/action-yamllint@v1
+      with:
+        config_file: .yamllint
+
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: ansible-lint
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: "Ansible_Master_Playbook.yaml"
+        override-deps: |
+          ansible==2.9
+          ansible-lint==4.2.0

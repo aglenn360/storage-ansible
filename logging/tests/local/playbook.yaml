@@ -1,0 +1,16 @@
+---
+### Playbook to test the role locally against the dev cluster
+  - name: Cluster certificates
+    hosts: localhost
+    vars_files:
+  
+    tasks:
+  
+    - module_defaults:
+        group/k8s:
+          kubeconfig: "{{ kubeconfig }}"
+          validate_certs: no 
+  
+      block:
+        - import_role: 
+            name: ansible
